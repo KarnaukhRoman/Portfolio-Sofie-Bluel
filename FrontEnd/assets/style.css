@@ -75,7 +75,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -97,6 +96,7 @@ nav li {
 
 li:hover {
 	color: #B1663C;
+	cursor: pointer;
 }
 #introduction {
 	display: flex;
@@ -125,6 +125,31 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+.filters{
+	text-align: center;
+	height: 40px;
+	margin : 2em auto ;	
+}
+
+.filters button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	color:#1D6154;
+	min-width: 100px;
+	height: 100%;
+	text-align: center;
+	border-radius: 60px ;
+	border: 1px solid #1D6154;
+	margin-right: 20px;
+	padding: 0 10px 0 10px;
+	cursor: pointer;
+}
+.filters button.active {
+    background-color: #1D6154; /* Активний фон */
+    color: #FFFFFF; /* Білий текст */
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -179,7 +204,20 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+/* for a modal window */
 
+
+/* Footer */
+#forgot-password {
+    display: block;
+    margin-top: 10px;
+    color: #007BFF;
+    text-decoration: none;
+    cursor: pointer;
+}
+#forgot-password:hover {
+    text-decoration: underline;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
