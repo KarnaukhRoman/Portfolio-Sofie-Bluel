@@ -1,7 +1,7 @@
 // .assets/js/main.js
 import { dataFetcher } from "./apirequests.js";
 import { renderGallery, createCategoryButtons } from "./galleryutils.js";
-
+import { setupLoginModal } from "./login.js";
 
 const URL_API_WORKS = 'http://localhost:5678/api/works';
 const STORAGE_KEY_GALLERY = 'gallery';
@@ -43,6 +43,7 @@ async function initCategories() {
 };
 // Ініціалізація категорій та галереї
 async function init() {
+    setupLoginModal();  // Initialize login modal
     await initCategories(); 
     await loadGallery(); 
 }
