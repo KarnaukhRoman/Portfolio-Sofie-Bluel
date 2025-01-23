@@ -1,20 +1,24 @@
 // .assets/js/login.js
 export function setupLoginModal() {
-    const loginButton = document.querySelector('nav ul li:nth-child(3)'); // Знаходимо елемент <li>login
-    const modal = document.getElementById('login-modal'); // Модальне вікно
-    const sections = document.querySelectorAll('main > section'); // Всі секції в <main>
+    const loginButton = document.querySelector('nav ul li:nth-child(3)'); // Find the element <li>login
+    const sections = document.querySelectorAll('main > section'); // All sections in the <main
+    const main = document.querySelector('main');
+
+    // Create and add HTML for the modal window
+    const modal = createLoginModal();
+    main.appendChild(modal); // Add a modal window after the last section
     console.log(modal);
-    console.log(sections);
-    // Відкрити модальне вікно
+
+
+    // Open a modal window
     loginButton.addEventListener('click', () => {
-        console.log('Login button clicked'); // Перевірка кліку
-        console.log('Before removing hidden:', modal.classList);
-        sections.forEach(section => section.classList.add('hidden')); // Приховуємо секції
-        modal.classList.remove('hidden'); // Показуємо модальне вікно
-        console.log('After removing hidden:', modal.classList);
+        // Hide all sections except 'login-modal'
+        sections.forEach(section => section.classList.add('hidden')); 
+        // Show the modal window
+        modal.classList.remove('hidden');
     });
 
-    // Закрити модальне вікно, якщо користувач натискає поза формою
+    // Close the modal window if the user clicks outside the form
     modal.addEventListener('click', (event) => {
         if (event.target === modal) {
             closeLoginModal(modal, sections);
@@ -23,11 +27,28 @@ export function setupLoginModal() {
     });
 
 }
-// Закриваємо модальне вікно і повертаємо секції
+
+// Function for creating HTML for a modal window
+function createLoginModal() {
+    const modal = document.createElement('section');
+    modal.id = 'login-modal';
+    modal.className = 'hidden';
+    modal.innerHTML = `
+        <h2>Log In</h2>
+        <form id="login-form">
+            <label for="username">E-mail</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Se connecter</button>
+        </form>
+        <a href="#" id="forgot-password">Mot de passe oublié?</a>
+    `;
+    return modal;
+}
+// Close the modal window and return the sections
 function closeLoginModal(modal, sections) {
-     // Приховуємо модальне вікно
-    console.log(modal.classList); // Повідомлення користувачеві
-    sections.forEach(section => section.classList.remove('hidden')); // Повертаємо секції
-    modal.classList.add('hidden'); // Приховуємо модальне вікно
+    sections.forEach(section => section.classList.remove('hidden'));
+    modal.classList.add('hidden'); 
 }
 
