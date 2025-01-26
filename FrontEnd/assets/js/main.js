@@ -1,7 +1,7 @@
 // .assets/js/main.js
 import { getData } from "./apirequests.js";
 import { renderGallery, createCategoryButtons } from "./galleryutils.js";
-import { setupLoginModal } from "./login.js";
+
 
 const URL_API_WORKS = 'http://localhost:5678/api/works';
 const STORAGE_KEY_GALLERY = 'gallery';
