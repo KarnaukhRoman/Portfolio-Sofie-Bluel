@@ -1,54 +1,51 @@
 // .assets/js/login.js
-export function setupLoginModal() {
-    const loginButton = document.querySelector('nav ul li:nth-child(3)'); // Find the element <li>login
-    const sections = document.querySelectorAll('main > section'); // All sections in the <main
-    const main = document.querySelector('main');
 
-    // Create and add HTML for the modal window
-    const modal = createLoginModal();
-    main.appendChild(modal); // Add a modal window after the last section
-    console.log(modal);
+import { URL_API_LOGIN } from "./main.js";
+import { postData } from "./apirequests.js";
 
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+    const emailInput = document.getElementById('email'); // Оновлена назва змінної
 
-    // Open a modal window
-    loginButton.addEventListener('click', () => {
-        // Hide all sections except 'login-modal'
-        sections.forEach(section => section.classList.add('hidden')); 
-        // Show the modal window
-        modal.classList.remove('hidden');
-    });
+    loginForm.addEventListener('submit', (event) => {
+        const emailValue = emailInput.value.trim();
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    // Close the modal window if the user clicks outside the form
-    modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            closeLoginModal(modal, sections);
+        if (!emailPattern.test(emailValue)) {
+            event.preventDefault(); // Зупиняємо відправлення форми
+            emailInput.classList.add('error'); // Додаємо клас помилки
+            alert('Veuillez entrer une adresse e-mail valide.');
+        } else {
+            emailInput.classList.remove('error'); // Видаляємо клас помилки, якщо все коректно
         }
-        console.log(event.target)
     });
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Запобігаємо стандартній поведінці форми
 
-}
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
 
-// Function for creating HTML for a modal window
-function createLoginModal() {
-    const modal = document.createElement('section');
-    modal.id = 'login-modal';
-    modal.className = 'hidden';
-    modal.innerHTML = `
-        <h2>Log In</h2>
-        <form id="login-form">
-            <label for="username">E-mail</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Se connecter</button>
-        </form>
-        <a href="#" id="forgot-password">Mot de passe oublié?</a>
-    `;
-    return modal;
-}
-// Close the modal window and return the sections
-function closeLoginModal(modal, sections) {
-    sections.forEach(section => section.classList.remove('hidden'));
-    modal.classList.add('hidden'); 
-}
+        // Перевірка введених даних
+        if (!email || !password) {
+            alert('Veuillez remplir tous les champs !');
+            return;
+        }
+        try {
+            // Викликаємо postData для логіну
+            const data = await postData(URL_API_LOGIN, {
+                email,
+                password,
+            });
+
+            // Збереження токена
+            localStorage.setItem('token', data.token);
+
+            alert('Connexion réussie!');
+            window.location.href = 'index.html'; // Перехід на головну сторінку
+        } catch (error) {
+            console.log(error);
+            alert('Erreur de connexion: ' + error.message);
+        }
+    });
+});
 

@@ -1,5 +1,5 @@
 // .assets/js/main.js
-import { dataFetcher } from "./apirequests.js";
+import { getData } from "./apirequests.js";
 import { renderGallery, createCategoryButtons } from "./galleryutils.js";
 import { setupLoginModal } from "./login.js";
 
@@ -7,10 +7,10 @@ const URL_API_WORKS = 'http://localhost:5678/api/works';
 const STORAGE_KEY_GALLERY = 'gallery';
 const URL_API_CATEGORIES = 'http://localhost:5678/api/categories';
 const STORAGE_KEY_CATEGORIES = 'categories';
-
+export const URL_API_LOGIN = 'http://localhost:5678/api/users/login';
 
 async function loadGallery(categoryId = null) {
-    const gallery = await dataFetcher(URL_API_WORKS, STORAGE_KEY_GALLERY);
+    const gallery = await getData(URL_API_WORKS, STORAGE_KEY_GALLERY);
     console.log(categoryId)
     if (categoryId === "all" || categoryId === null) {
         // Show all categories
@@ -23,12 +23,11 @@ async function loadGallery(categoryId = null) {
 };
 
 async function initCategories() {
-    const categories = await dataFetcher(URL_API_CATEGORIES, STORAGE_KEY_CATEGORIES);
+    const categories = await getData(URL_API_CATEGORIES, STORAGE_KEY_CATEGORIES);
     createCategoryButtons(categories, loadGallery);
 };
 // Ініціалізація категорій та галереї
 async function init() {
-    setupLoginModal();  // Initialize login modal
     await initCategories(); 
     await loadGallery(); 
 }

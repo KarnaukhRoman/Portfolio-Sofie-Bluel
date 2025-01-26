@@ -93,6 +93,15 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
+nav ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+/* Selon la présentation de Figma, lorsque la page "login" est sélectionnée, 
+	le menu « login » dans le bloc de navigation doit être mis en gras. */
+nav ul li a.active {
+    font-weight: bold;
+}
 
 li:hover {
 	color: #B1663C;
@@ -205,11 +214,11 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 /* for a modal window */
-.hidden {
+/* .hidden {
     display: none !important;
-}
+} */
 
-#login-modal {
+#page-login {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -218,11 +227,11 @@ input[type="submit"]{
     background-color: white;
 }
 
-#login-modal h2 {
+#page-login h2 {
 	margin-bottom: 30px;
 }
 
-#login-modal form {
+#page-login form {
 	display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -232,7 +241,7 @@ input[type="submit"]{
 	height: 32%;
 }
 
-#login-modal input {
+#page-login input {
     display: block;
 	font-size: 1.2em;
 	height: 30px;
@@ -244,11 +253,11 @@ input[type="submit"]{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09); 
 }
 
-#login-modal input:focus {
+#page-login input:focus {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); 
 }
 
-#login-modal button {
+#page-login button {
 	align-self: center;
 	font-family: 'Syne';
 	font-weight: 700;
@@ -260,7 +269,6 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
-/* Footer */
 #forgot-password {
     display: block;
     margin-top: 10px;
@@ -271,6 +279,7 @@ input[type="submit"]{
 #forgot-password:hover {
     text-decoration: underline;
 }
+/* Footer */
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
