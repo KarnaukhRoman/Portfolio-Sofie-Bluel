@@ -98,3 +98,24 @@ function closeLoginModal(modal, sections) {
     sections.forEach(section => section.classList.remove('hidden'));
     modal.classList.add('hidden'); 
 }
+
+export function editMode() {
+    const buttons = document.querySelector('.filters');
+    console.log("Buttons filters: ", buttons);
+    buttons.classList.add('hidden');
+};
+
+export function setupLogout(linkSelector) {
+    const loginLink = document.querySelector(linkSelector);
+    if (!loginLink) return; // Якщо посилання не знайдено, нічого не робимо
+
+    loginLink.textContent = 'logout'; // Змінюємо текст на "Logout"
+    loginLink.href = '#'; // Деактивуємо стандартне посилання
+    loginLink.addEventListener('click', (event) => {
+        event.preventDefault(); // Запобігаємо стандартному переходу
+        localStorage.removeItem('token'); // Видаляємо токен з локального сховища
+        sessionStorage.removeItem('loginValid'); // Скидаємо статус входу
+        alert('Vous êtes déconnecté.'); // Сповіщення про вихід
+        window.location.reload(); // Перезавантаження сторінки
+    });
+}

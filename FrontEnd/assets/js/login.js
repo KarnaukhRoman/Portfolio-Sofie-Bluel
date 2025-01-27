@@ -2,6 +2,8 @@
 
 import { URL_API_LOGIN } from "./main.js";
 import { postData } from "./apirequests.js";
+import { editMode } from "./galleryutils.js";
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
@@ -39,9 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Збереження токена
             localStorage.setItem('token', data.token);
-
+        //     if (isValidToken(data.token)) { // Перевірка валідності токена
+        //    // Встановлюємо loginValid як true тільки на поточну сесію
+        //         loginValid = true;
+        //     };
+            if (isValidToken(data.token)) {
+                sessionStorage.setItem('loginValid', 'true');
+            }
             alert('Connexion réussie!');
+            // editMode();
             window.location.href = 'index.html'; // Перехід на головну сторінку
+            // window.location.replace('index.html');
+            // window.location.href = 'index.html?edit=true';
+            
         } catch (error) {
             console.log(error);
             alert('Erreur de connexion: ' + error.message);
@@ -49,3 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Функція перевірки валідності токена
+export function isValidToken(token) {
+    const tokenParts = token.split('.');
+    if (tokenParts.length === 3) {
+        try {
+            const payload = JSON.parse(atob(tokenParts[1])); // Декодуємо частину payload
+            const expirationTime = payload.exp * 1000; // Преобразуємо час в мілісекунди
+            const currentTime = Date.now();
+
+            // Перевірка на валідність токену за часом
+            if (currentTime < expirationTime) {
+                return true;
+            }
+        } catch (e) {
+            console.error('Invalid token format');
+        }
+    }
+    return false;
+}

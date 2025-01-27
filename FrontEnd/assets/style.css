@@ -83,6 +83,23 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+.edit-mode-text{
+	width: auto;
+	height: 60px;
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 25px;
+	align-content: center;
+}
+/* .edit-mode-text::before{
+	content: "\f044"; 
+	font-family: "Font Awesome 6 Free"; 
+	font-weight: 900;
+	font-size: 18px;
+	color: white;
+} */
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -134,6 +151,30 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+.modify-wrapper {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 30px; /* Відступ від заголовка */
+    font-size: 0.9rem; /* Розмір тексту */
+    color: #333; /* Колір тексту */
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
+.modify-wrapper:hover {
+    color: #007bff; /* Зміна кольору при наведенні */
+}
+
+.modify-wrapper i {
+    margin-right: 5px; /* Відступ між іконкою та текстом */
+    color: #555; /* Колір іконки */
+	transition: color 0.3s ease;
+}
+
+/* for a modal window */
+.hidden {
+    display: none !important;
+}
+
 .filters{
 	text-align: center;
 	height: 40px;
@@ -213,10 +254,6 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-/* for a modal window */
-/* .hidden {
-    display: none !important;
-} */
 
 #page-login {
 	display: flex;
