@@ -1,6 +1,6 @@
 // .assets/js/login.js
+import { userMessage } from "./main.js";
 import { postData, URL_API_LOGIN } from "./apirequests.js";
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
@@ -45,7 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
         } catch (error) {
             console.log(error);
-            alert('Erreur de connexion: ' + error.message);
+            userMessage('.info-message','Votre e-mail ou mot de passe est incorrect', 'error');
+            // alert('Erreur de connexion: ' + error.message);
         }
     });
 });

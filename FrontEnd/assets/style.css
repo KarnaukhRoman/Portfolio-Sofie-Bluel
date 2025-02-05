@@ -56,7 +56,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
 section {
 	margin: 50px 0
@@ -84,13 +84,18 @@ h2{
 	color: #1D6154
 }
 .edit-mode-text{
-	width: auto;
-	height: 60px;
-	background-color: black;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	color: white;
-	text-align: center;
 	font-size: 25px;
-	align-content: center;
+	background-color: black;
+	height: 50px; /* Висота бару */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
 }
 
 nav ul {
@@ -255,12 +260,25 @@ input[type="submit"]{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-    height: 800px;
+    height: 600px;
     background-color: white;
 }
 
-#page-login h2 {
+/* #page-login h2 {
 	margin-bottom: 30px;
+} */
+
+.info-message, .add-photo-message, .delete-photo-message {
+	align-self: center;
+	font-family: 'Syne';
+    margin-top: 20px;
+}
+.error{
+	color: red;	
+}
+
+.success{
+	color: green;
 }
 
 #page-login form {
@@ -270,7 +288,7 @@ input[type="submit"]{
     padding: 20px;
     border-radius: 8px;
     width: 35%;
-	height: 32%;
+	height: 300px;
 }
 
 #page-login input {
@@ -302,6 +320,7 @@ input[type="submit"]{
 }
 
 #forgot-password {
+	align-self: center;
     display: block;
     margin-top: 10px;
     color: #007BFF;
@@ -369,9 +388,8 @@ footer nav ul {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-start;
-	margin-left: 60px;
-	margin-right: 60px;
-	/* flex-grow: 1; */
+	width: 80%;
+	align-self: center;
 }
 
 .image-wrapper {
@@ -380,14 +398,14 @@ footer nav ul {
     width: 77px;
     height: 102px;
     overflow: hidden;
-    border-radius: 8px;
+    /* border-radius: 8px; */
 }
 
 .image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    /* border-radius: 8px; */
 }
 
 .delete-button {
@@ -413,8 +431,8 @@ footer nav ul {
 hr {
 	border: none; /* Забирає стандартну рамку */
 	border-top: 2px solid #ccc; /* Верхня лінія */
-	width: 67%; /* ��ирина широких ліній */
-    margin-bottom: 20px; /* Відступ від кінця елемента */
+	width: 70%; /* ��ирина широких ліній */
+    margin-top: auto; /* Відступ від кінця елемента */
 	/* margin: 50px; Відступи зверху та знизу */
   }
 
@@ -424,7 +442,7 @@ hr {
 	font-weight: 700;
 	font-size: 16px;
 	align-items: center;
-	margin-top: auto;
+	margin: auto;
 	width: 40%;
 	height: 40px;
 	text-align: center;
@@ -478,7 +496,7 @@ hr {
 	height: 688px;
 }
 
-.desc-image{
+.description-image{
 	font-style: "Work Sans";
 	font-weight: 400;
 	font-size: 10px;
@@ -505,15 +523,16 @@ left: 15px;
 right: 15px;
 }
 
-#add-photo-form{
-	display: flex;
-	flex-direction: column;
+#add-photo-form {
+    display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-start;
-    margin-left: 60px;
-    margin-right: 60px;
+    width: 70%;
+    align-self: center;
 }
+
 .photo-upload-block {
 display: flex;
 flex-direction: column;
@@ -526,6 +545,7 @@ margin-bottom: 20px;
 background-color: #E8F1F6;
 }
 
+
 .photo-upload-block .photo-preview {
 margin-top: 10px;
 display: none;
@@ -535,13 +555,15 @@ height: auto;
 .photo-upload-preview {
 position: relative;
 display: flex;
+flex-direction: column;
 align-items: center;
 justify-content: center;
 width: 100%;
-height: 150px;
+height: 170px;
 border: 2px dashed #d9d9d9;
 border-radius: 8px;
-background-color: #E8F1F6;;
+background-color: #E8F1F6;
+margin-bottom: 30px;
 }
 .photo-upload-preview img {
 max-width: 100%;
@@ -570,10 +592,10 @@ color: #555;
   
 #add-photo-modal form input,
 #add-photo-modal form select {
-width: 100%;
 padding: 10px;
 margin-bottom: 20px;
 border: 1px solid #d9d9d9;
+box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 border-radius: 6px;
 font-size: 14px;
 }
@@ -599,7 +621,7 @@ font-size: 14px;
 	font-weight: 700;
 	font-size: 16px;
 	align-items: center;
-	margin-top: auto;
+	margin: auto;
 	width: 40%;
 	height: 40px;
 	text-align: center;
@@ -609,4 +631,9 @@ font-size: 14px;
 	background-color: #1D6154; /* Активний фон */
 	color: #FFFFFF; /* Білий текст */
 	cursor: pointer;
+}
+#button-new-photo:disabled{
+	background-color: #B9C5CC;
+    color: #999999;
+    cursor: not-allowed;
 }

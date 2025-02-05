@@ -19,20 +19,37 @@ export async function getData(URL_API) {
     }
 };
 
-export async function postData(apiUrl, body) {
-    const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    });
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Помилка запиту: ' + response.status);
+//Function for sending both JSON and FormData
+export async function postData(apiUrl, body, token = null, isFormData = false) {
+    let headers = { "Accept": "application/json" };
+
+    if (!isFormData) {
+        headers["Content-Type"] = "application/json";
+        body = JSON.stringify(body);
     }
-    return response.json();
+
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: isFormData ? {"Authorization": `Bearer ${token}`} : headers, // Без заголовків для FormData
+            body: body,
+        });
+        console.log("Response status:", response.status);
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || `Error request: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error in postData:", error);
+        throw error;
+    }
 }
+
 
 export async function deleteData(apiUrl, token) {
     try {
