@@ -3,7 +3,6 @@ import { initCategories, userMessage, allGallery } from "./main.js";
 import { getData, deleteData, URL_API_DELETE, URL_API_WORKS, URL_API_CATEGORIES, postData } from "./apirequests.js";
 
 export function galleryFilter(categoryId = null) {
-    // const allGallery = await getData(URL_API_WORKS);
     if (categoryId === "all" || categoryId === null) {
         // Show all categories
         renderGallery(allGallery);
@@ -71,32 +70,24 @@ export function enableEditMode() {
     editModeText.className = 'edit-mode-text';
     const icon = document.createElement('i');
     icon.className = 'fa-solid fa-pen-to-square';
-
     // Add an icon before the text
     editModeText.appendChild(icon);
-
     // Add text after the icon
     const textNode = document.createTextNode(' Mode edition');
     editModeText.appendChild(textNode);
-
     document.body.prepend(editModeText);
        // Add an icon and a caption next to “Mes Projets” in the portfolio section
        const portfolioHeading = document.querySelector('#portfolio h2');
        if (portfolioHeading) {
            const modifyWrapper = document.createElement('span');
            modifyWrapper.classList.add('modify-wrapper'); 
-   
            const iconPortfolio = document.createElement('i');
            iconPortfolio.className = 'fa-regular fa-pen-to-square'; 
-   
            const textPortfolio = document.createTextNode(' modifier');
-   
            modifyWrapper.appendChild(iconPortfolio);
            modifyWrapper.appendChild(textPortfolio);
-   
            portfolioHeading.appendChild(modifyWrapper);
            modifyWrapper.addEventListener('click', () => {
-            // alert("You are in edit mode")
             showGalleryModal();
             });
     };
@@ -105,7 +96,7 @@ function disableEditMode(linkSelector) {
     localStorage.removeItem('token'); // Delete the token from the local storage
     sessionStorage.removeItem('loginValid'); // Resetting the login status
 
-// Видаляємо елементи редагування
+// Delete editing elements
     const editModeText = document.querySelector('.edit-mode-text');
     const loginLink = document.querySelector(linkSelector);
     if (editModeText) editModeText.remove();
@@ -123,10 +114,8 @@ function disableEditMode(linkSelector) {
         newLink.href = 'login.html';
         newLink.textContent = 'login';
         newLink.className = oldLink.className; // зберігаємо стилі
-
         oldLink.replaceWith(newLink); // Повністю замінюємо елемент
     }};
-
 
 export async function setupLogout(linkSelector) {
     const loginLink = document.querySelector(linkSelector);
@@ -143,7 +132,7 @@ export async function setupLogout(linkSelector) {
 };
 
 async function createGalleryModal() {
-    const gallery = await getData(URL_API_WORKS);
+    // const gallery = await getData(URL_API_WORKS);
     const modal = document.createElement('div');
     modal.id = 'gallery-modal';
     modal.style.display = 'none';
@@ -159,8 +148,8 @@ async function createGalleryModal() {
     </div>
     `;
     const galleryContent = modal.querySelector('.gallery-modal-content');
-    if (gallery) {
-        gallery.forEach((item) => {
+    if (allGallery) {
+        allGallery.forEach((item) => {
             const imageWrapper = document.createElement('div');
             imageWrapper.className = "image-wrapper";
             imageWrapper.dataset.id = item.id;
@@ -186,8 +175,6 @@ async function showGalleryModal() {
         main.appendChild(modal); 
     };
     modal.style.display = 'flex';
-    
-
     // Close the modal window if the user clicks outside the form
     const closeButton = modal.querySelector('.button-close');
     modal.addEventListener('click', (event) => {
@@ -216,7 +203,7 @@ async function showGalleryModal() {
             }
         });
     });
-
+    
     const addPhotoButton = document.querySelector('#button-add-photo');
     addPhotoButton.addEventListener('click', () => {
         modal.style.display = 'none'; 
@@ -400,21 +387,21 @@ function setupAddPhotoModal() {
             }
         });
           
-          // Fill the drop-down list of categories
-          async function loadCategories(categorySelect) {
-               const categories = await getData(URL_API_CATEGORIES);
-               if (!categories || categories.length === 0) return;
-                const emptyOption = document.createElement('option');
-                emptyOption.value = "";
-                emptyOption.textContent = "";
-                categorySelect.appendChild(emptyOption);
-                categories.forEach(category => {
-                    const option = document.createElement('option');
-                    option.value = category.id;
-                    option.textContent = category.name;
-                    categorySelect.appendChild(option);
-                });
-           }
+        // Fill the drop-down list of categories
+        async function loadCategories(categorySelect) {
+            const categories = await getData(URL_API_CATEGORIES);
+            if (!categories || categories.length === 0) return;
+            const emptyOption = document.createElement('option');
+            emptyOption.value = "";
+            emptyOption.textContent = "";
+            categorySelect.appendChild(emptyOption);
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+        }
         loadCategories(modalElements.photoCategory);
     }
     addPhotoModal.style.display = 'flex';
