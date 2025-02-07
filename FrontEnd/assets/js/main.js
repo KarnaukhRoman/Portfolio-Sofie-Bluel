@@ -25,7 +25,6 @@ export function userMessage(tag, message, type) {
 
 export async function init() {
     allGallery = await getData(URL_API_WORKS);
-    console.log(allGallery);
     // If the token is present and valid, activate edit mode.
     if (sessionStorage.getItem('loginValid') === 'true') {
         setupLogout('nav a[href="login.html"]');
@@ -37,4 +36,6 @@ export async function init() {
     }    
 }
 
-init();
+document.addEventListener("DOMContentLoaded", async () => {
+    await init();
+});

@@ -226,7 +226,6 @@ async function showGalleryModal() {
 
 function addNewProjectToGallery(project) {
     const gallery = document.querySelector('.gallery');
-    console.log('Gallery: ', gallery);
     const blockGallery = document.querySelector('.gallery');
     if (!blockGallery) {
         console.error('Gallery container not found!');
@@ -329,7 +328,6 @@ function setupAddPhotoModal() {
          
         modalElements.photoInput.addEventListener("change", (event) => {
         const file = event.target.files[0];
-        console.log("File uploaded:", file);
         if (file) {
             if (file.size > 4 * 1024 * 1024) { // 4 MB
                 alert("The file is too large. The maximum size is 4 MB.");
@@ -391,7 +389,6 @@ function setupAddPhotoModal() {
           });
       
           modalElements.closeButton.addEventListener('click', () => {
-            console.log("Modal closed");
             clearPhotoPreview(modalElements);
               addPhotoModal.style.display = 'none';
           });  

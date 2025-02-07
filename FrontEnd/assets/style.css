@@ -91,7 +91,7 @@ h2{
 	color: white;
 	font-size: 20px;
 	background-color: black;
-	height: 50px; /* Висота бару */
+	height: 50px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -495,7 +495,7 @@ hr {
 }
 
 .description-image{
-	font-style: "Work Sans";
+	font-family: 'Work Sans';
 	font-weight: 400;
 	font-size: 10px;
     text-align: center;
@@ -604,7 +604,7 @@ font-size: 14px;
 	height: 38px;
 	background-color: #B9C5CC;
 	font-size: 14px;
-	font-style: "Work Sans";
+	font-family: 'Work Sans';
 	font-weight: 500;
 	color: #306685;
 	border: none;
