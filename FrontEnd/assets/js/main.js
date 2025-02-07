@@ -1,8 +1,8 @@
 // .assets/js/main.js
-import { getData, URL_API_CATEGORIES } from "./apirequests.js";
+import { getData, URL_API_WORKS, URL_API_CATEGORIES } from "./apirequests.js";
 import { galleryFilter, createCategoryButtons, enableEditMode, setupLogout } from "./galleryutils.js";
 
-
+export let allGallery = [];
 export async function initCategories() {
     const categories = await getData(URL_API_CATEGORIES);
     createCategoryButtons(categories);
@@ -24,14 +24,16 @@ export function userMessage(tag, message, type) {
 
 
 export async function init() {
+    allGallery = await getData(URL_API_WORKS);
+    console.log(allGallery);
     // If the token is present and valid, activate edit mode.
     if (sessionStorage.getItem('loginValid') === 'true') {
         setupLogout('nav a[href="login.html"]');
         enableEditMode();
-        await galleryFilter();
+        galleryFilter();
     }else{
         await initCategories(); 
-        await galleryFilter();     
+        galleryFilter();     
     }    
 }
 

@@ -1,9 +1,9 @@
 // .assets/js/galleryutils.js
-import { initCategories, userMessage } from "./main.js";
+import { initCategories, userMessage, allGallery } from "./main.js";
 import { getData, deleteData, URL_API_DELETE, URL_API_WORKS, URL_API_CATEGORIES, postData } from "./apirequests.js";
 
-export async function galleryFilter(categoryId = null) {
-    const allGallery = await getData(URL_API_WORKS);
+export function galleryFilter(categoryId = null) {
+    // const allGallery = await getData(URL_API_WORKS);
     if (categoryId === "all" || categoryId === null) {
         // Show all categories
         renderGallery(allGallery);

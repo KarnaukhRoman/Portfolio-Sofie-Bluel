@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
-            // Calling postData for login( I need to rework here)
             const data = await postData(URL_API_LOGIN, {
                 email,
                 password,
@@ -46,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.log(error);
             userMessage('.info-message','Votre e-mail ou mot de passe est incorrect', 'error');
-            // alert('Erreur de connexion: ' + error.message);
         }
     });
 });
