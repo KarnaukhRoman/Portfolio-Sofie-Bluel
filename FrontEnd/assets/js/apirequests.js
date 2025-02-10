@@ -2,8 +2,6 @@
 export const URL_API_WORKS = 'http://localhost:5678/api/works';
 export const URL_API_CATEGORIES = 'http://localhost:5678/api/categories';
 export const URL_API_LOGIN = 'http://localhost:5678/api/users/login';
-export const URL_API_DELETE = 'http://localhost:5678/api/works/';
-
 
 export async function getData(URL_API) {
     try {
@@ -49,7 +47,6 @@ export async function postData(apiUrl, body, token = null, isFormData = false) {
         throw error;
     }
 }
-
 
 export async function deleteData(apiUrl, token) {
     try {

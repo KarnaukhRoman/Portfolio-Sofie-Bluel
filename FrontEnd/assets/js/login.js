@@ -66,4 +66,4 @@ export function isValidToken(token) {
         }
     }
     return false;
-}
+};
