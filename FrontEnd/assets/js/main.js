@@ -22,8 +22,7 @@ export function userMessage(tag, message, type) {
     }, 4000);
 };
 
-
-export async function init() {
+async function init() {
     allGallery = await getData(URL_API_WORKS);
     // If the token is present and valid, activate edit mode.
     if (sessionStorage.getItem('loginValid') === 'true') {
@@ -34,7 +33,7 @@ export async function init() {
         await initCategories(); 
         galleryFilter();     
     }    
-}
+};
 
 document.addEventListener("DOMContentLoaded", async () => {
     await init();

@@ -1,6 +1,6 @@
 // .assets/js/galleryutils.js
 import { initCategories, userMessage, allGallery } from "./main.js";
-import { getData, deleteData, URL_API_DELETE, URL_API_WORKS, URL_API_CATEGORIES, postData } from "./apirequests.js";
+import { getData, deleteData, URL_API_WORKS, URL_API_CATEGORIES, postData } from "./apirequests.js";
 
 export function galleryFilter(categoryId = null) {
     if (categoryId === "all" || categoryId === null) {
@@ -92,6 +92,7 @@ export function enableEditMode() {
             });
     };
 };
+
 function disableEditMode(linkSelector) {         
     localStorage.removeItem('token'); // Delete the token from the local storage
     sessionStorage.removeItem('loginValid'); // Resetting the login status
@@ -115,9 +116,10 @@ function disableEditMode(linkSelector) {
         newLink.textContent = 'login';
         newLink.className = oldLink.className; // зберігаємо стилі
         oldLink.replaceWith(newLink); // Повністю замінюємо елемент
-    }};
+    }
+};
 
-export async function setupLogout(linkSelector) {
+export function setupLogout(linkSelector) {
     const loginLink = document.querySelector(linkSelector);
     if (!loginLink) return; // If the link is not found, we do nothing
     loginLink.textContent = 'logout'; // Change the text to “Logout”
@@ -131,7 +133,7 @@ export async function setupLogout(linkSelector) {
     });
 };
 
-async function createGalleryModal() {
+function createGalleryModal() {
     // const gallery = await getData(URL_API_WORKS);
     const modal = document.createElement('div');
     modal.id = 'gallery-modal';
@@ -163,15 +165,15 @@ async function createGalleryModal() {
         });
     }  
     return modal;
-}
+};
 
-async function showGalleryModal() {
+function showGalleryModal() {
     const loginButton = document.querySelector('nav ul li:nth-child(3)');
     const sections = document.querySelectorAll('main > section');
     const main = document.querySelector('footer');
     let modal = document.querySelector('#gallery-modal');
     if (!modal){
-        modal = await createGalleryModal();
+        modal = createGalleryModal();
         main.appendChild(modal); 
     };
     modal.style.display = 'flex';
@@ -190,7 +192,7 @@ async function showGalleryModal() {
     deleteButtons.forEach((button) => {
         button.addEventListener('click', () => {
             const token = localStorage.getItem('token');
-            if(deleteData(URL_API_DELETE+button.dataset.index, token)){
+            if(deleteData(URL_API_WORKS+button.dataset.index, token)){
                 let itemRemove = galleryContent.querySelector(`[data-id="${button.dataset.index}"]`);
                 let figureRemove = galleryMain.querySelector(`[data-id="${button.dataset.index}"]`);
                 if (itemRemove) {
@@ -207,7 +209,7 @@ async function showGalleryModal() {
     const addPhotoButton = document.querySelector('#button-add-photo');
     addPhotoButton.addEventListener('click', () => {
         modal.style.display = 'none'; 
-        setupAddPhotoModal();
+        showAddPhotoModal();
     });
 };
 
@@ -238,7 +240,6 @@ function addNewProjectToGallery(project) {
     `;
     galleryModal.appendChild(imageWrapper);
 };
-
 
 function createAddPhotoModal() {
     const modal = document.createElement('div');
@@ -271,7 +272,7 @@ function createAddPhotoModal() {
     return modal;
 }
 
-function setupAddPhotoModal() {
+function showAddPhotoModal() {
     const main = document.querySelector('footer');
     let addPhotoModal = document.querySelector('#add-photo-modal');
 
