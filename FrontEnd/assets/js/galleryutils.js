@@ -245,7 +245,8 @@ function createAddPhotoModal() {
     const modal = document.createElement('div');
     modal.id = 'add-photo-modal';
     modal.style.display = 'none';
-    modal.innerHTML = modal.innerHTML = `
+    modal.innerHTML = '';
+    modal.innerHTML = `
     <div class="add-photo-modal-block">
         <button class="button-back"><i class="fa-solid fa-arrow-left"></i></button>
         <button class="button-close"><i class="fa-solid fa-xmark"></i></button>

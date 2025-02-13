@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password').value.trim();
 
         if (!email || !password) {
-            alert('Veuillez remplir tous les champs !');
+            userMessage('.info-message','Veuillez remplir tous les champs !','error');
             return;
         }
         try {
