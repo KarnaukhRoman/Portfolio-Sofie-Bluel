@@ -319,7 +319,7 @@ function showAddPhotoModal() {
         const file = event.target.files[0];
         if (file) {
             if (file.size > 4 * 1024 * 1024) { // 4 MB
-                alert("The file is too large. The maximum size is 4 MB.");
+                userMessage('.add-photo-message',"The file is too large. The maximum size is 4 MB.", 'error');
                 return;
             };
             if (modalElements.photoPreview.src) {
